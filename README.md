@@ -15,16 +15,15 @@ Mobile-responsive interface
 ## POSTMAN collection
 GitHub folder structure for JSON collections of API tests
 
-API-test_collection/
-   └── Tours/
-        ├── POST_createTour.json
-        ├── GET_getTours.json
-        ├── GET_getTourById.json
-        ├── PATCH_updateTour.json
-        ├── DELETE_deleteTour.json
-        ├── PATCH_updatePhoto.json
-        └── DELETE_deletePhoto.json
-
+API-test_collection/ <br>
+└── Tours/ <br>
+    ├── POST_createTour.json      # Create new tour <br>
+    ├── GET_getTours.json         # Get list of tours <br>
+    ├── GET_getTourById.json      # Get tour by ID <br>
+    ├── PATCH_updateTour.json     # Update tour <br>
+    ├── DELETE_deleteTour.json    # Delete tour <br>
+    ├── PATCH_updatePhoto.json    # Update photo for tour <br>
+    └── DELETE_deletePhoto.json   # Delete photo for tour <br>
         
 
 
