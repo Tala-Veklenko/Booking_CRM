@@ -12,4 +12,19 @@ Basic analytics and personal account <br>
 Mobile-responsive interface
 
 
+## POSTMAN collection
+GitHub folder structure for JSON collections of API tests
+
+API-test_collection/
+   └── Tours/
+        ├── POST_createTour.json
+        ├── GET_getTours.json
+        ├── GET_getTourById.json
+        ├── PATCH_updateTour.json
+        ├── DELETE_deleteTour.json
+        ├── PATCH_updatePhoto.json
+        └── DELETE_deletePhoto.json
+
+        
+
 
