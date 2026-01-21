@@ -1,0 +1,2716 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/v1/health": {
+      "get": {
+        "operationId": "HealthController_getHealth",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    },
+    "/api/v1/health/users": {
+      "get": {
+        "operationId": "HealthController_getHealhUsers",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      },
+      "post": {
+        "operationId": "HealthController_createHealthUser",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "description": "Add a new health user",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "email"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "John Doe"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "name@example.com"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    },
+    "/api/v1/tours": {
+      "post": {
+        "operationId": "ToursController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTourDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Tours"
+        ]
+      },
+      "get": {
+        "operationId": "ToursController_findAll",
+        "parameters": [
+          {
+            "name": "lang",
+            "required": false,
+            "in": "query",
+            "description": "Language for tour details",
+            "schema": {
+              "default": "en",
+              "example": "en",
+              "type": "string"
+            }
+          },
+          {
+            "name": "countryISO2Code",
+            "required": false,
+            "in": "query",
+            "description": "ISO2 код країни призначення туру ",
+            "schema": {
+              "example": "UA",
+              "type": "string"
+            }
+          },
+          {
+            "name": "cityId",
+            "required": false,
+            "in": "query",
+            "description": "ID of the destination city",
+            "schema": {
+              "example": null,
+              "type": "number"
+            }
+          },
+          {
+            "name": "operatorId",
+            "required": false,
+            "in": "query",
+            "description": "ID of the operator",
+            "schema": {
+              "example": null,
+              "type": "number"
+            }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "description": "Type of the tour (e.g., Adventure, Sightseeing)",
+            "schema": {
+              "example": "",
+              "type": "string"
+            }
+          },
+          {
+            "name": "minStartDate",
+            "required": false,
+            "in": "query",
+            "description": "Minimum start date for the tour search (YYYY-MM-DD)",
+            "schema": {
+              "example": "",
+              "type": "string"
+            }
+          },
+          {
+            "name": "maxStartDate",
+            "required": false,
+            "in": "query",
+            "description": "Maximum start date for the tour search (YYYY-MM-DD)",
+            "schema": {
+              "example": "",
+              "type": "string"
+            }
+          },
+          {
+            "name": "minEndDate",
+            "required": false,
+            "in": "query",
+            "description": "Minimum end date for the tour search (YYYY-MM-DD)",
+            "schema": {
+              "example": "",
+              "type": "string"
+            }
+          },
+          {
+            "name": "maxEndDate",
+            "required": false,
+            "in": "query",
+            "description": "Maximum end date for the tour search (YYYY-MM-DD)",
+            "schema": {
+              "example": "",
+              "type": "string"
+            }
+          },
+          {
+            "name": "minPrice",
+            "required": false,
+            "in": "query",
+            "description": "Minimum price for the tour",
+            "schema": {
+              "example": null,
+              "type": "number"
+            }
+          },
+          {
+            "name": "maxPrice",
+            "required": false,
+            "in": "query",
+            "description": "Maximum price for the tour",
+            "schema": {
+              "example": null,
+              "type": "number"
+            }
+          },
+          {
+            "name": "isFeatured",
+            "required": false,
+            "in": "query",
+            "description": "Filter by featured tours",
+            "schema": {
+              "example": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Limit for pagination",
+            "schema": {
+              "minimum": 1,
+              "example": null,
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Offset for pagination",
+            "schema": {
+              "minimum": 0,
+              "example": null,
+              "type": "number"
+            }
+          },
+          {
+            "name": "sortBy",
+            "required": false,
+            "in": "query",
+            "description": "Field to sort by (e.g., startDate, price, id)",
+            "schema": {
+              "example": "",
+              "type": "string",
+              "enum": [
+                "startDate",
+                "price",
+                "id"
+              ]
+            }
+          },
+          {
+            "name": "sortOrder",
+            "required": false,
+            "in": "query",
+            "description": "Sort order (asc or desc)",
+            "schema": {
+              "example": "",
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Tours"
+        ]
+      }
+    },
+    "/api/v1/tours/check-availability": {
+      "post": {
+        "operationId": "ToursController_checkAvailability",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CheckAvailabilityDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Tours"
+        ]
+      }
+    },
+    "/api/v1/tours/{id}": {
+      "get": {
+        "operationId": "ToursController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Tours"
+        ]
+      },
+      "patch": {
+        "operationId": "ToursController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTourDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Tours"
+        ]
+      },
+      "delete": {
+        "operationId": "ToursController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Tours"
+        ]
+      }
+    },
+    "/api/v1/tours/{tourId}/photos/{photoId}": {
+      "patch": {
+        "operationId": "ToursController_updatePhoto",
+        "parameters": [
+          {
+            "name": "tourId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "photoId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTourPhotoDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Tours"
+        ]
+      },
+      "delete": {
+        "operationId": "ToursController_deletePhoto",
+        "parameters": [
+          {
+            "name": "tourId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "photoId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "tags": [
+          "Tours"
+        ]
+      }
+    },
+    "/api/v1/admin/tours": {
+      "get": {
+        "operationId": "AdminToursController_findAll",
+        "parameters": [
+          {
+            "name": "lang",
+            "required": false,
+            "in": "query",
+            "description": "Language for tour details",
+            "schema": {
+              "default": "en",
+              "example": "en",
+              "type": "string"
+            }
+          },
+          {
+            "name": "countryISO2Code",
+            "required": false,
+            "in": "query",
+            "description": "ISO2 код країни призначення туру ",
+            "schema": {
+              "example": "UA",
+              "type": "string"
+            }
+          },
+          {
+            "name": "cityId",
+            "required": false,
+            "in": "query",
+            "description": "ID of the destination city",
+            "schema": {
+              "example": null,
+              "type": "number"
+            }
+          },
+          {
+            "name": "operatorId",
+            "required": false,
+            "in": "query",
+            "description": "ID of the operator",
+            "schema": {
+              "example": null,
+              "type": "number"
+            }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "description": "Type of the tour (e.g., Adventure, Sightseeing)",
+            "schema": {
+              "example": "",
+              "type": "string"
+            }
+          },
+          {
+            "name": "minStartDate",
+            "required": false,
+            "in": "query",
+            "description": "Minimum start date for the tour search (YYYY-MM-DD)",
+            "schema": {
+              "example": "",
+              "type": "string"
+            }
+          },
+          {
+            "name": "maxStartDate",
+            "required": false,
+            "in": "query",
+            "description": "Maximum start date for the tour search (YYYY-MM-DD)",
+            "schema": {
+              "example": "",
+              "type": "string"
+            }
+          },
+          {
+            "name": "minEndDate",
+            "required": false,
+            "in": "query",
+            "description": "Minimum end date for the tour search (YYYY-MM-DD)",
+            "schema": {
+              "example": "",
+              "type": "string"
+            }
+          },
+          {
+            "name": "maxEndDate",
+            "required": false,
+            "in": "query",
+            "description": "Maximum end date for the tour search (YYYY-MM-DD)",
+            "schema": {
+              "example": "",
+              "type": "string"
+            }
+          },
+          {
+            "name": "minPrice",
+            "required": false,
+            "in": "query",
+            "description": "Minimum price for the tour",
+            "schema": {
+              "example": null,
+              "type": "number"
+            }
+          },
+          {
+            "name": "maxPrice",
+            "required": false,
+            "in": "query",
+            "description": "Maximum price for the tour",
+            "schema": {
+              "example": null,
+              "type": "number"
+            }
+          },
+          {
+            "name": "isFeatured",
+            "required": false,
+            "in": "query",
+            "description": "Filter by featured tours",
+            "schema": {
+              "example": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Limit for pagination",
+            "schema": {
+              "minimum": 1,
+              "example": null,
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Offset for pagination",
+            "schema": {
+              "minimum": 0,
+              "example": null,
+              "type": "number"
+            }
+          },
+          {
+            "name": "sortBy",
+            "required": false,
+            "in": "query",
+            "description": "Field to sort by (e.g., startDate, price, id)",
+            "schema": {
+              "example": "",
+              "type": "string",
+              "enum": [
+                "startDate",
+                "price",
+                "id"
+              ]
+            }
+          },
+          {
+            "name": "sortOrder",
+            "required": false,
+            "in": "query",
+            "description": "Sort order (asc or desc)",
+            "schema": {
+              "example": "",
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "AdminTours"
+        ]
+      }
+    },
+    "/api/v1/admin/tours/{id}/feature": {
+      "patch": {
+        "operationId": "AdminToursController_updateFeatureStatus",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTourFeatureDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "AdminTours"
+        ]
+      }
+    },
+    "/api/v1/auth": {
+      "post": {
+        "operationId": "AuthController_create",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/api/v1/operator": {
+      "post": {
+        "operationId": "OperatorController_addOperator",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "description": "Додати нового оператора",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "email",
+                  "firstName",
+                  "lastName",
+                  "website",
+                  "phone",
+                  "userId"
+                ],
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "example": "operator@example.com"
+                  },
+                  "firstName": {
+                    "type": "string",
+                    "example": "Іван"
+                  },
+                  "lastName": {
+                    "type": "string",
+                    "example": "Іванов"
+                  },
+                  "website": {
+                    "type": "string",
+                    "format": "uri",
+                    "example": "https://example.com"
+                  },
+                  "phone": {
+                    "type": "string",
+                    "example": "+380501234567"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Operator"
+        ]
+      },
+      "patch": {
+        "description": "\n  Rules:\n  - companyName, description, philosophy, photo can be updated anytime\n  - firstName, lastName, phone, website:\n    • can be updated ONLY when operator status is \"rejected\"\n    • after changing any of these fields, status is automatically set to \"pending\"\n    • cannot be updated when status is \"pending\" or \"approved\"\n  ",
+        "operationId": "OperatorController_updateOperator",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "companyName": {
+                    "type": "string",
+                    "example": "Travel Dreams LLC"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "We organize unforgettable tours across Europe"
+                  },
+                  "philosophy": {
+                    "type": "string",
+                    "example": "Honesty, comfort and unforgettable memories"
+                  },
+                  "firstName": {
+                    "type": "string",
+                    "example": "Ivan",
+                    "description": "Allowed only when status is \"rejected\""
+                  },
+                  "lastName": {
+                    "type": "string",
+                    "example": "Ivanov",
+                    "description": "Allowed only when status is \"rejected\""
+                  },
+                  "phone": {
+                    "type": "string",
+                    "example": "+380501234567",
+                    "description": "Allowed only when status is \"rejected\""
+                  },
+                  "website": {
+                    "type": "string",
+                    "example": "https://example.com",
+                    "description": "Allowed only when status is \"rejected\""
+                  },
+                  "photo": {
+                    "type": "string",
+                    "format": "binary",
+                    "nullable": true,
+                    "description": "Operator photo (JPEG/PNG/WEBP, max 5MB)"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "summary": "Update operator profile",
+        "tags": [
+          "Operator"
+        ]
+      }
+    },
+    "/api/v1/operator/me": {
+      "get": {
+        "operationId": "OperatorController_getMe",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Operator"
+        ]
+      }
+    },
+    "/api/v1/operator/all": {
+      "get": {
+        "operationId": "OperatorController_getAll",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Кількість записів на сторінку",
+            "schema": {
+              "example": 20,
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Зсув для пагінації",
+            "schema": {
+              "example": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "description": "Фільтр по статусу",
+            "schema": {
+              "enum": [
+                "pending",
+                "approved",
+                "rejected"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Список операторів успішно отримано"
+          }
+        },
+        "summary": "Отримати список операторів з опціональним фільтром по статусу",
+        "tags": [
+          "Operator"
+        ]
+      }
+    },
+    "/api/v1/operator/popular": {
+      "get": {
+        "operationId": "OperatorController_getPopular",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Maximum number of operators to return",
+            "schema": {
+              "example": 6,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of popular operators with at least one active tour",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "userId": {
+                        "type": "number"
+                      },
+                      "companyName": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "firstName": {
+                        "type": "string"
+                      },
+                      "lastName": {
+                        "type": "string"
+                      },
+                      "website": {
+                        "type": "string"
+                      },
+                      "phone": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      },
+                      "philosophy": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "photo": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "bookingsCount": {
+                        "type": "number"
+                      },
+                      "activeToursCount": {
+                        "type": "number",
+                        "description": "Number of active tours for the operator"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get list of popular operators with active tours",
+        "tags": [
+          "Operator"
+        ]
+      }
+    },
+    "/api/v1/operator/{id}": {
+      "get": {
+        "operationId": "OperatorController_getById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Operator"
+        ]
+      }
+    },
+    "/api/v1/operator/me/photo": {
+      "delete": {
+        "operationId": "OperatorController_deletePhoto",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Operator"
+        ]
+      }
+    },
+    "/api/v1/user": {
+      "patch": {
+        "operationId": "UserController_updateUser",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "description": "Update user info",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserInfoDto"
+              },
+              "examples": {
+                "example1": {
+                  "summary": "Example payload",
+                  "value": {
+                    "firstPersonName": "Іван",
+                    "firstPersonSurname": "Іванов",
+                    "secondPersonName": "Марія",
+                    "secondPersonSurname": "Петренко",
+                    "phone": "+380501234567"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User updated successfully"
+          }
+        },
+        "summary": "Update user profile info",
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/api/v1/user/me": {
+      "get": {
+        "operationId": "UserController_getMe",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Returns user entity"
+          }
+        },
+        "summary": "Get current user info (based on JWT)",
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/api/v1/user/bookings": {
+      "get": {
+        "operationId": "UserController_getUserBookings",
+        "parameters": [
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "description": "Filter by booking statuses (comma-separated)",
+            "schema": {
+              "example": "pending_payment,confirmed",
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Limit for pagination",
+            "schema": {
+              "example": 6,
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Offset for pagination",
+            "schema": {
+              "example": 0,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of user bookings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserBookingsPaginatedResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/api/v1/user/bookings/{id}": {
+      "get": {
+        "operationId": "UserController_getUserBooking",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User booking details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserBookingResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/api/v1/user/bookings/{id}/retry-payment": {
+      "post": {
+        "operationId": "UserController_retryBookingPayment",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns payment link for retry",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "example": {
+                    "paymentLink": "https://checkout.stripe.com/..."
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Booking is not in pending_payment status"
+          },
+          "404": {
+            "description": "Booking not found"
+          }
+        },
+        "summary": "Retry payment for pending booking",
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/api/v1/payments/stripe-webhook": {
+      "post": {
+        "operationId": "PaymentsController_handleStripeWebhook",
+        "parameters": [
+          {
+            "name": "stripe-signature",
+            "required": true,
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Payments"
+        ]
+      }
+    },
+    "/api/v1/payments/liqpay-webhook": {
+      "post": {
+        "operationId": "PaymentsController_handleLiqpayWebhook",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Payments"
+        ]
+      }
+    },
+    "/api/v1/bookings": {
+      "post": {
+        "operationId": "BookingsController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBookingDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Booking successfully created and payment link generated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseBookingDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input data."
+          }
+        },
+        "summary": "Create a new booking and generate a payment link",
+        "tags": [
+          "Bookings"
+        ]
+      }
+    },
+    "/api/v1/bookings/{id}/expiration": {
+      "get": {
+        "operationId": "BookingsController_getExpiration",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Booking expiration details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "bookingId": {
+                      "type": "number"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "expiresAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "isExpired": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Booking is not in pending_payment status or missing payment session"
+          },
+          "404": {
+            "description": "Booking not found"
+          }
+        },
+        "summary": "Get expiration time for a booking with pending_payment status",
+        "tags": [
+          "Bookings"
+        ]
+      }
+    },
+    "/api/v1/bookings/{id}/repay": {
+      "post": {
+        "operationId": "BookingsController_repay",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Payment link generated."
+          }
+        },
+        "summary": "Repay a booking that is pending payment",
+        "tags": [
+          "Bookings"
+        ]
+      }
+    },
+    "/api/v1/bookings/{tourId}": {
+      "get": {
+        "operationId": "BookingsController_getStats",
+        "parameters": [
+          {
+            "name": "tourId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Booking stats",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookingStatsDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get booking statistics for a tour",
+        "tags": [
+          "Bookings"
+        ]
+      }
+    },
+    "/api/v1/bookings/{tourId}/{bookingId}": {
+      "get": {
+        "operationId": "BookingsController_getBooking",
+        "parameters": [
+          {
+            "name": "tourId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "bookingId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Booking and tour details"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "summary": "Get booking details with tour information",
+        "tags": [
+          "Bookings"
+        ]
+      }
+    },
+    "/api/v1/countries": {
+      "get": {
+        "operationId": "CountriesController_getCountries",
+        "parameters": [
+          {
+            "name": "lang",
+            "required": false,
+            "in": "query",
+            "description": "Language for country names",
+            "schema": {
+              "maxLength": 2,
+              "default": "en",
+              "example": "en",
+              "type": "string",
+              "enum": [
+                "uk",
+                "en"
+              ]
+            }
+          },
+          {
+            "name": "q",
+            "required": false,
+            "in": "query",
+            "description": "Search query to filter countries by name",
+            "schema": {
+              "example": null,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Countries"
+        ]
+      }
+    },
+    "/api/v1/countries/{iso2}/cities": {
+      "get": {
+        "operationId": "CitiesController_getCities",
+        "parameters": [
+          {
+            "name": "iso2",
+            "required": true,
+            "in": "path",
+            "description": "ISO 3166-1 alpha-2 country code",
+            "schema": {
+              "example": "UA",
+              "type": "string",
+              "enum": [
+                "AF",
+                "AL",
+                "DZ",
+                "AS",
+                "AD",
+                "AO",
+                "AI",
+                "AQ",
+                "AG",
+                "AR",
+                "AM",
+                "AW",
+                "AU",
+                "AT",
+                "AZ",
+                "BS",
+                "BH",
+                "BD",
+                "BB",
+                "BY",
+                "BE",
+                "BZ",
+                "BJ",
+                "BM",
+                "BT",
+                "BO",
+                "BA",
+                "BW",
+                "BV",
+                "BR",
+                "IO",
+                "BN",
+                "BG",
+                "BF",
+                "BI",
+                "KH",
+                "CM",
+                "CA",
+                "CV",
+                "KY",
+                "CF",
+                "TD",
+                "CL",
+                "CN",
+                "CX",
+                "CC",
+                "CO",
+                "KM",
+                "CG",
+                "CD",
+                "CK",
+                "CR",
+                "CI",
+                "HR",
+                "CU",
+                "CY",
+                "CZ",
+                "DK",
+                "DJ",
+                "DM",
+                "DO",
+                "EC",
+                "EG",
+                "SV",
+                "GQ",
+                "ER",
+                "EE",
+                "ET",
+                "FK",
+                "FO",
+                "FJ",
+                "FI",
+                "FR",
+                "GF",
+                "PF",
+                "TF",
+                "GA",
+                "GM",
+                "GE",
+                "DE",
+                "GH",
+                "GI",
+                "GR",
+                "GL",
+                "GD",
+                "GP",
+                "GU",
+                "GT",
+                "GN",
+                "GW",
+                "GY",
+                "HT",
+                "HM",
+                "VA",
+                "HN",
+                "HK",
+                "HU",
+                "IS",
+                "IN",
+                "ID",
+                "IR",
+                "IQ",
+                "IE",
+                "IL",
+                "IT",
+                "JM",
+                "JP",
+                "JO",
+                "KZ",
+                "KE",
+                "KI",
+                "KP",
+                "KR",
+                "KW",
+                "KG",
+                "LA",
+                "LV",
+                "LB",
+                "LS",
+                "LR",
+                "LY",
+                "LI",
+                "LT",
+                "LU",
+                "MO",
+                "MG",
+                "MW",
+                "MY",
+                "MV",
+                "ML",
+                "MT",
+                "MH",
+                "MQ",
+                "MR",
+                "MU",
+                "YT",
+                "MX",
+                "FM",
+                "MD",
+                "MC",
+                "MN",
+                "MS",
+                "MA",
+                "MZ",
+                "MM",
+                "NA",
+                "NR",
+                "NP",
+                "NL",
+                "NC",
+                "NZ",
+                "NI",
+                "NE",
+                "NG",
+                "NU",
+                "NF",
+                "MP",
+                "MK",
+                "NO",
+                "OM",
+                "PK",
+                "PW",
+                "PS",
+                "PA",
+                "PG",
+                "PY",
+                "PE",
+                "PH",
+                "PN",
+                "PL",
+                "PT",
+                "PR",
+                "QA",
+                "RE",
+                "RO",
+                "RU",
+                "RW",
+                "SH",
+                "KN",
+                "LC",
+                "PM",
+                "VC",
+                "WS",
+                "SM",
+                "ST",
+                "SA",
+                "SN",
+                "SC",
+                "SL",
+                "SG",
+                "SK",
+                "SI",
+                "SB",
+                "SO",
+                "ZA",
+                "GS",
+                "ES",
+                "LK",
+                "SD",
+                "SR",
+                "SJ",
+                "SZ",
+                "SE",
+                "CH",
+                "SY",
+                "TW",
+                "TJ",
+                "TZ",
+                "TH",
+                "TL",
+                "TG",
+                "TK",
+                "TO",
+                "TT",
+                "TN",
+                "TR",
+                "TM",
+                "TC",
+                "TV",
+                "UG",
+                "UA",
+                "AE",
+                "GB",
+                "US",
+                "UM",
+                "UY",
+                "UZ",
+                "VU",
+                "VE",
+                "VN",
+                "VG",
+                "VI",
+                "WF",
+                "EH",
+                "YE",
+                "ZM",
+                "ZW",
+                "AX",
+                "BQ",
+                "CW",
+                "GG",
+                "IM",
+                "JE",
+                "ME",
+                "BL",
+                "MF",
+                "RS",
+                "SX",
+                "SS",
+                "XK"
+              ]
+            }
+          },
+          {
+            "name": "lang",
+            "required": true,
+            "in": "query",
+            "description": "Language for city names",
+            "schema": {
+              "maxLength": 2,
+              "default": "en",
+              "example": "en",
+              "type": "string",
+              "enum": [
+                "uk",
+                "en"
+              ]
+            }
+          },
+          {
+            "name": "q",
+            "required": false,
+            "in": "query",
+            "description": "Search query to filter cities by name",
+            "schema": {
+              "example": null,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Cities"
+        ]
+      }
+    },
+    "/api/v1/cache-health": {
+      "get": {
+        "operationId": "HealthController_getRedis",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Health"
+        ]
+      }
+    },
+    "/api/v1/operator-bookings": {
+      "get": {
+        "operationId": "OperatorBookingsController_getOperatorBookings",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Список бронювань",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OperatorBookingResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Отримати всі оплачені бронювання туроператора",
+        "tags": [
+          "Operator Bookings"
+        ]
+      }
+    },
+    "/api/v1/admin/operators": {
+      "get": {
+        "operationId": "AdminOperatorsController_getOperators",
+        "parameters": [
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "example": 50,
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "example": 0,
+              "type": "number"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "description": "pending | approved | rejected",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "pending",
+                "approved",
+                "rejected"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Список операторів",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AdminOperatorFullDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Отримати всіх операторів з фільтром і пагінацією",
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/api/v1/admin/operators/{id}": {
+      "get": {
+        "operationId": "AdminOperatorsController_getOperatorById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Детальна інформація про оператора",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminOperatorFullDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Отримати одного оператора",
+        "tags": [
+          "Admin"
+        ]
+      },
+      "patch": {
+        "operationId": "AdminOperatorsController_updateStatus",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateOperatorStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Статус оператора оновлено",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminOperatorFullDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Оновити статус оператора",
+        "tags": [
+          "Admin"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Booking CRM API",
+    "description": "Booking CRM API description",
+    "version": "1.0",
+    "contact": {
+
+    }
+  },
+  "tags": [
+    {
+      "name": "Booking CRM",
+      "description": ""
+    }
+  ],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "TourPhotoDto": {
+        "type": "object",
+        "properties": {
+          "isMain": {
+            "type": "boolean",
+            "description": "Is this the main photo for the tour?",
+            "default": false
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the photo"
+          },
+          "url": {
+            "type": "string",
+            "description": "URL of the photo (if already uploaded)"
+          }
+        }
+      },
+      "CreateTourDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Title of the tour (e.g. \"Weekend Getaway to Paris\")",
+            "maxLength": 255,
+            "default": ""
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed description of the tour program (e.g. \"Explore the Eiffel Tower, Louvre Museum, and enjoy a Seine river cruise.\")",
+            "default": ""
+          },
+          "countryISO2Code": {
+            "type": "string",
+            "example": "UA",
+            "description": "ISO2 код країни призначення туру "
+          },
+          "cityId": {
+            "type": "number",
+            "example": "",
+            "description": "ID міста призначення туру ((отримано з GET /countries/{countryCode}/cities)) ",
+            "default": ""
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of the tour (e.g., \"Sightseeing\", \"Beach\", \"Adventure\")",
+            "default": "",
+            "maxLength": 100
+          },
+          "price": {
+            "type": "string",
+            "description": "Price per person for the tour (e.g., 1250.75)",
+            "default": "",
+            "pattern": "^\\d+(\\.\\d{1,2})?$"
+          },
+          "currency": {
+            "type": "string",
+            "description": "Валюта туру (за замовчуванням UAH)",
+            "maxLength": 3,
+            "enum": [
+              "UAH",
+              "USD",
+              "EUR"
+            ]
+          },
+          "startDate": {
+            "type": "string",
+            "description": "Start date of the tour in YYYY-MM-DD format (e.g., 2025-08-15)",
+            "default": ""
+          },
+          "endDate": {
+            "type": "string",
+            "description": "End date of the tour in YYYY-MM-DD format (e.g., 2025-08-22)",
+            "default": ""
+          },
+          "availableSpots": {
+            "type": "number",
+            "description": "Number of available spots for the tour (e.g., 20)",
+            "default": "",
+            "minimum": 2,
+            "maximum": 100
+          },
+          "conditions": {
+            "type": "string",
+            "description": "Terms and conditions for the tour (e.g. \"Includes accommodation, breakfast. Excludes flights.\") ",
+            "default": ""
+          },
+          "photos": {
+            "description": "Metadata for tour photos. The order should correspond to the uploaded files.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TourPhotoDto"
+            }
+          },
+          "photo_files": {
+            "type": "array",
+            "description": "Array of photos (1–10 files, JPG/PNG, max 5MB each)",
+            "items": {
+              "type": "string",
+              "format": "binary"
+            },
+            "minItems": 1,
+            "maxItems": 10
+          },
+          "isActive": {
+            "type": "boolean",
+            "description": "Is the tour currently active and available for booking?",
+            "default": ""
+          }
+        },
+        "required": [
+          "title",
+          "description",
+          "countryISO2Code",
+          "cityId",
+          "price",
+          "startDate",
+          "endDate",
+          "availableSpots",
+          "photo_files"
+        ]
+      },
+      "CheckAvailabilityDto": {
+        "type": "object",
+        "properties": {
+          "tourId": {
+            "type": "number",
+            "example": 1,
+            "description": "The ID of the tour"
+          },
+          "spots": {
+            "type": "number",
+            "example": 2,
+            "description": "Number of spots to check"
+          }
+        },
+        "required": [
+          "tourId",
+          "spots"
+        ]
+      },
+      "UpdateTourDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Title of the tour (e.g. \"Weekend Getaway to Paris\")",
+            "maxLength": 255,
+            "default": ""
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed description of the tour program (e.g. \"Explore the Eiffel Tower, Louvre Museum, and enjoy a Seine river cruise.\")",
+            "default": ""
+          },
+          "countryISO2Code": {
+            "type": "string",
+            "example": "UA",
+            "description": "ISO2 код країни призначення туру "
+          },
+          "cityId": {
+            "type": "number",
+            "example": "",
+            "description": "ID міста призначення туру ((отримано з GET /countries/{countryCode}/cities)) ",
+            "default": ""
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of the tour (e.g., \"Sightseeing\", \"Beach\", \"Adventure\")",
+            "default": "",
+            "maxLength": 100
+          },
+          "price": {
+            "type": "string",
+            "description": "Price per person for the tour (e.g., 1250.75)",
+            "default": "",
+            "pattern": "^\\d+(\\.\\d{1,2})?$"
+          },
+          "currency": {
+            "type": "string",
+            "description": "Валюта туру (за замовчуванням UAH)",
+            "maxLength": 3,
+            "enum": [
+              "UAH",
+              "USD",
+              "EUR"
+            ]
+          },
+          "startDate": {
+            "type": "string",
+            "description": "Start date of the tour in YYYY-MM-DD format (e.g., 2025-08-15)",
+            "default": ""
+          },
+          "endDate": {
+            "type": "string",
+            "description": "End date of the tour in YYYY-MM-DD format (e.g., 2025-08-22)",
+            "default": ""
+          },
+          "availableSpots": {
+            "type": "number",
+            "description": "Number of available spots for the tour (e.g., 20)",
+            "default": 0,
+            "minimum": 0,
+            "maximum": 100
+          },
+          "conditions": {
+            "type": "string",
+            "description": "Terms and conditions for the tour (e.g. \"Includes accommodation, breakfast. Excludes flights.\") ",
+            "default": ""
+          },
+          "photos": {
+            "description": "Metadata for tour photos. The order should correspond to the uploaded files.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TourPhotoDto"
+            }
+          },
+          "photo_files": {
+            "type": "array",
+            "description": "Array of photos (1–10 files, JPG/PNG, max 5MB each)",
+            "items": {
+              "type": "string",
+              "format": "binary"
+            },
+            "minItems": 1,
+            "maxItems": 10
+          },
+          "isActive": {
+            "type": "boolean",
+            "description": "Is the tour currently active and available for booking?",
+            "default": ""
+          }
+        }
+      },
+      "UpdateTourPhotoDto": {
+        "type": "object",
+        "properties": {
+          "isMain": {
+            "type": "boolean",
+            "example": "true",
+            "description": "Is this the main photo for the tour?"
+          },
+          "description": {
+            "type": "string",
+            "example": "A beautiful view of the mountains.",
+            "description": "A description of the photo."
+          }
+        }
+      },
+      "UpdateTourFeatureDto": {
+        "type": "object",
+        "properties": {
+          "isFeatured": {
+            "type": "boolean",
+            "description": "Status of the tour feature",
+            "example": true
+          }
+        },
+        "required": [
+          "isFeatured"
+        ]
+      },
+      "UpdateUserInfoDto": {
+        "type": "object",
+        "properties": {
+
+        }
+      },
+      "OperatorShortDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "photo": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "id",
+          "firstName",
+          "lastName",
+          "photo"
+        ]
+      },
+      "CityShortDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      },
+      "CountryShortDto": {
+        "type": "object",
+        "properties": {
+          "iso2": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "iso2",
+          "name"
+        ]
+      },
+      "TourShortDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "operatorId": {
+            "type": "number"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "countryISO2Code": {
+            "type": "string"
+          },
+          "cityId": {
+            "type": "number"
+          },
+          "type": {
+            "type": "string"
+          },
+          "price": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "startDate": {
+            "type": "string"
+          },
+          "endDate": {
+            "type": "string"
+          },
+          "availableSpots": {
+            "type": "number"
+          },
+          "conditions": {
+            "type": "string"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "isFeatured": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "photos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TourPhotoDto"
+            }
+          },
+          "operator": {
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OperatorShortDto"
+              }
+            ]
+          },
+          "city": {
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CityShortDto"
+              }
+            ]
+          },
+          "country": {
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CountryShortDto"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "operatorId",
+          "title",
+          "countryISO2Code",
+          "cityId",
+          "price",
+          "currency",
+          "startDate",
+          "endDate",
+          "availableSpots",
+          "isActive",
+          "isFeatured",
+          "createdAt",
+          "updatedAt",
+          "operator",
+          "city",
+          "country"
+        ]
+      },
+      "UserBookingResponseDto": {
+        "type": "object",
+        "properties": {
+          "bookingId": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string"
+          },
+          "bookingPrice": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "numberOfPeople": {
+            "type": "number"
+          },
+          "firstPersonName": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "paymentLink": {
+            "type": "string",
+            "nullable": true
+          },
+          "canRetryPayment": {
+            "type": "boolean"
+          },
+          "tour": {
+            "$ref": "#/components/schemas/TourShortDto"
+          }
+        },
+        "required": [
+          "bookingId",
+          "status",
+          "bookingPrice",
+          "currency",
+          "numberOfPeople",
+          "paymentLink",
+          "canRetryPayment",
+          "tour"
+        ]
+      },
+      "PaginationMetaDto": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number",
+            "example": 12
+          },
+          "limit": {
+            "type": "number",
+            "example": 6
+          },
+          "offset": {
+            "type": "number",
+            "example": 0
+          }
+        },
+        "required": [
+          "total",
+          "limit",
+          "offset"
+        ]
+      },
+      "UserBookingsPaginatedResponseDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserBookingResponseDto"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PaginationMetaDto"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ]
+      },
+      "CreateBookingDto": {
+        "type": "object",
+        "properties": {
+          "tourId": {
+            "type": "number",
+            "example": 1,
+            "description": "ID of the tour to book"
+          },
+          "numberOfPeople": {
+            "type": "number",
+            "example": 2,
+            "description": "Number of people for the booking",
+            "default": 2
+          },
+          "firstPersonName": {
+            "type": "string",
+            "example": "John",
+            "description": "First person's name"
+          },
+          "firstPersonSurname": {
+            "type": "string",
+            "example": "Doe",
+            "description": "First person's surname"
+          },
+          "secondPersonName": {
+            "type": "string",
+            "example": "Jane",
+            "description": "Second person's name"
+          },
+          "secondPersonSurname": {
+            "type": "string",
+            "example": "Doe",
+            "description": "Second person's surname"
+          },
+          "phone": {
+            "type": "string",
+            "example": "+380123456789",
+            "description": "Contact phone number"
+          },
+          "paymentProvider": {
+            "type": "string",
+            "example": "liqpay",
+            "description": "Payment provider to use for now only liqpay",
+            "default": "liqpay"
+          }
+        },
+        "required": [
+          "tourId",
+          "numberOfPeople",
+          "firstPersonName",
+          "firstPersonSurname",
+          "secondPersonName",
+          "secondPersonSurname",
+          "phone",
+          "paymentProvider"
+        ]
+      },
+      "ResponseBookingDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 1,
+            "description": "ID of the created booking"
+          },
+          "status": {
+            "type": "string",
+            "example": "pending_payment",
+            "description": "Status of the booking"
+          },
+          "paymentLink": {
+            "type": "string",
+            "example": "\u003Cform method=\"POST\" action=\"https://www.liqpay.ua/api/3/checkout\" accept-charset=\"utf-8\"\u003E\u003Cinput type=\"hidden\" name=\"data\" value=\"eyJhY3Rp....\" /\u003E\u003Cinput type=\"hidden\" name=\"signature\" value=\"8M+Fnwbiu....\" /\u003E\u003Cinput type=\"image\" src=\"//static.liqpay.ua/buttons/p1en.radius.png\" name=\"btn_text\" /\u003E\u003C/form\u003E",
+            "description": "URL to redirect for payment"
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "paymentLink"
+        ]
+      },
+      "BookingStatsDto": {
+        "type": "object",
+        "properties": {
+
+        }
+      },
+      "OperatorBookingResponseDto": {
+        "type": "object",
+        "properties": {
+          "bookingId": {
+            "type": "number",
+            "example": 1
+          },
+          "tourTitle": {
+            "type": "string",
+            "example": "Discover Carpathians"
+          },
+          "customerName": {
+            "type": "string",
+            "example": "Анна та Марк"
+          },
+          "customerPhone": {
+            "type": "string",
+            "example": "+380501112233"
+          },
+          "startDate": {
+            "type": "string",
+            "example": "2025-07-01"
+          },
+          "endDate": {
+            "type": "string",
+            "example": "2025-07-10"
+          },
+          "totalPriceUAH": {
+            "type": "string",
+            "example": "4000.00"
+          },
+          "status": {
+            "type": "string",
+            "example": "paid"
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2025-11-10T10:34:12.000Z"
+          }
+        },
+        "required": [
+          "bookingId",
+          "tourTitle",
+          "customerName",
+          "customerPhone",
+          "startDate",
+          "endDate",
+          "totalPriceUAH",
+          "status",
+          "createdAt"
+        ]
+      },
+      "AdminOperatorFullDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "email": {
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "userId": {
+            "type": "number"
+          },
+          "companyName": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "website": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "approved",
+              "rejected"
+            ]
+          },
+          "philosophy": {
+            "type": "string"
+          },
+          "photo": {
+            "type": "string"
+          },
+          "rejectionReason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "email",
+          "createdAt",
+          "updatedAt",
+          "userId",
+          "companyName",
+          "description",
+          "firstName",
+          "lastName",
+          "website",
+          "phone",
+          "status"
+        ]
+      },
+      "UpdateOperatorStatusDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "approved",
+              "rejected"
+            ]
+          },
+          "rejectionReason": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 500,
+            "description": "Причина відмови (обовʼязково якщо статус rejected)"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      }
+    }
+  }
+}
