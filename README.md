@@ -1,15 +1,32 @@
-# Booking_CRM
-This is a B2C and B2B web platform that enables users to search, book, and pay for tours online.
+# Backend QA Portfolio – Booking CRM
 
-#### 1. Project Description 
-TourHub is an online travel platform that allows travelers to search, book, and pay for tours with minimal steps. Tour operators can use the CRM functionality to manage their offers, bookings, and view reports. The MVP includes core booking functionality, tour search, a personal dashboard, and a basic admin panel.
+This repository contains examples of my QA work on a Booking CRM pet project.
 
-#### 2. Scope
-Full booking flow: search → tour → booking → payment → confirmation <br>
-Tour operator dashboard: manage tours, view bookings, see reports <br>
-Secure payment system <br>
-Basic analytics and personal account <br>
-Mobile-responsive interface
+## Frontend Testing
+- Cross-browser testing (Chrome, Firefox, Safari)
+- UI validation using Figma designs
+- DevTools for network, console, and performance checks
+- Frontend-backend data consistency verification
+
+## Beckend testing
+- REST API (manual testing via Postman)
+- Booking & payment business logic
+- Input validation and API contract
+- Pagination and data consistency
+- Authorization and security (OWASP Top 10 basics)
+
+## Artifacts
+- Bug reports (Markdown + full PDF list)
+- Postman collections with API tests
+- Test strategy and notes
+
+## Key Findings
+- IDOR vulnerability in booking creation
+- Authorization bypass for admin endpoints
+- Missing validation causing 500 errors
+- Inconsistent pagination due to missing ORDER BY
+- Price calculation mismatch (frontend vs backend)
+
 
 
 ## POSTMAN collection
