@@ -1,0 +1,64 @@
+{
+	"info": {
+		"_postman_id": " ",
+		"name": "Booking_CRM-API test collection",
+    "description": "Swagger API collection https://booking-crm.onrender.com/docs#/",
+		"schema": " ",
+		"_exporter_id": " ",
+		"_collection_link": " "
+	},
+	"item": [
+		{
+			"name": "GET All Tours",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Response is an array\", function () {",
+							"    pm.expect(pm.response.json()).to.be.an('array');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/tours/{id}",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"posts"
+					]
+				},
+        "description": "",
+			},
+			"response": []
+		},
+		{
+			"name": "GET Single Post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Response has userId and title\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('userId');",
+							"    pm.expect(jsonData).to.have.property('title');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
