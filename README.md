@@ -11,12 +11,16 @@ This project demonstrates end-to-end manual testing of frontend and backend func
 
 ---
 ## 📁 Repository Structure
+```
+Booking_CRM/
+│
+├── test-cases/
+├── bug-reports/
+├── checklists/
+├── API_Testing/
+├── Test_Design/
+```
 
-- test-cases/
-- bug-reports/
-- checklists/
-- api/
-- test-design/
 
 ---
 ## 👤 Roles Tested
