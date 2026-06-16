@@ -5,10 +5,14 @@ A set of defects identified during CRM system testing.
 Full bug report table:  
 [View on Google Sheets](https://docs.google.com/spreadsheets/d/1nP8SRikWiZRDQ8U_e685QJtSKlIGsFeBAujW8juyOT8/edit?usp=sharing)
 
-### Example issues:
+The bug tracking document is organized into two separate sheets:
+- **Backend Reports** — API issues, business logic validation, authorization, and data consistency problems
+- **Frontend Reports** — UI/UX issues, layout inconsistencies, cross-browser problems, and usability defects
+
+Example issues:
 - Registration form accepts invalid email format  
 - Tour price field allows negative values  
-- UI elements misaligned on mobile devices  
+- UI elements misaligned on mobile devices    
 
 ### Bug Report Example
 
