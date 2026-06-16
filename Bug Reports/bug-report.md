@@ -1,8 +1,8 @@
-## 🐞 Bug Reports
+## Bug Reports
 
 A set of defects identified during CRM system testing.
 
-📊 Full bug report table:  
+Full bug report table:  
 [View on Google Sheets](https://docs.google.com/spreadsheets/d/1nP8SRikWiZRDQ8U_e685QJtSKlIGsFeBAujW8juyOT8/edit?usp=sharing)
 
 ### Example issues:
@@ -10,7 +10,7 @@ A set of defects identified during CRM system testing.
 - Tour price field allows negative values  
 - UI elements misaligned on mobile devices  
 
-### 🐞 Bug Report Example
+### Bug Report Example
 
 #### Bug 1: Access control issue
 
