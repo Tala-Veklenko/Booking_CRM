@@ -1,93 +1,110 @@
-# CRM System Testing Project
+# 🧪 CRM System Testing Project
 
-This repository contains testing documentation for a CRM system used by travel agencies.
+This repository contains QA documentation for a CRM system used by travel agencies.
 
-The system allows:
-- users to search and book tours
-- tour operators to manage tour offers
-- administrators to manage users and system data
+The system supports:
+- searching and booking tours
+- tour management by operators
+- user and system management by administrators
 
-During this project I performed manual testing of both frontend and backend functionality.
+This project demonstrates end-to-end manual testing of frontend and backend functionality across multiple user roles.
 
-## Roles Tested
+---
+## 📁 Repository Structure
 
-Testing was performed from three user perspectives:
+- test-cases/
+- bug-reports/
+- checklists/
+- api/
+- test-design/
 
-User
-- search tours
-- view tour details
-- create bookings
+---
+## 👤 Roles Tested
 
-Tour Operator
-- create and edit tours
-- manage bookings
-- update pricing and availability
+### 🧑 User
+- Search and filter tours
+- View tour details
+- Create bookings
 
-Admin
-- manage users
-- monitor system data
-- control permissions
+### 🧑‍💼 Tour Operator
+- Create and update tours
+- Manage bookings
+- Update pricing and availability
 
-## Scope of Testing
+### 🛠 Admin
+- Manage users
+- Control system permissions
+- Monitor system data
 
-The following types of testing were performed:
+---
 
-Frontend Testing
+## 🧪 Testing Scope
+
+### 🖥 Frontend Testing
 - Cross-browser testing (Chrome, Firefox, Safari)
-- UI validation using Figma designs
-- DevTools for network, console, and performance checks
-- Frontend-backend data consistency verification
+- UI validation against Figma designs
+- DevTools usage (network, console, performance)
+- Data consistency between UI and backend
 
-Beckend testing
-- REST API (manual testing via Postman)
-- Booking & payment business logic
-- Input validation and API contract
-- Pagination and data consistency
-- Authorization and security (OWASP Top 10 basics)
+### 🔌 Backend Testing
+- REST API testing (Postman, Swagger)
+- Booking and payment business logic validation
+- Input validation and boundary testing
+- Pagination and data integrity checks
+- Basic security testing (authentication & authorization)
 
-## Test Documentation
+---
 
-Test documentation includes:
+## 📂 Test Documentation
 
-- Test plan
-- Test cases
+The project includes the following artifacts:
+
+- Test Plan
+- Test Cases
 - Checklists
-- Bug reports
+- Bug Reports
+- API Collections (Postman)
 
-All documentation can be found in the corresponding folders.
+All files are available in the corresponding repository folders.
 
-## Tools Used
+---
 
-- ClickUp (bug tracking simulation)
-- Postman (API testing)
-- Swagger (API collection)
-- Chrome DevTools
-- Google Sheets (documentation)
-- CHatGPT (support)
+## 🛠 Tools Used
 
-## Example Bugs Found
+- Postman — API testing
+- Swagger — API documentation
+- Chrome DevTools — debugging & network analysis
+- ClickUp — bug tracking
+- Google Sheets — test documentation
+- ChatGPT — support for test idea generation
 
-Examples of issues identified during testing:
+---
 
-1. Registration form allows invalid email format
-2. Tour price field accepts negative values
-3. "Add to booking" button not visible on mobile screens
-4. API returns incorrect status code for invalid request
+## 🐞 Example Defects Found
 
-Detailed bug reports are available in the Bug-Reports folder.
+- Registration form accepts invalid email formats
+- Tour price field allows negative values
+- "Add to booking" button is missing on mobile devices
+- API returns incorrect HTTP status codes for invalid requests
 
-## Test Cases
+Full bug reports are available in the `bug-reports/` folder.
 
-More than 20 test cases were created covering:
+---
 
-- booking flow
-- role permissions
+## 📊 Test Coverage
+
+- Booking flow
+- Role-based access control
 - CRUD operations for tours
-- user management
+- User management
+- Payment workflow validation
 
-See Test-Cases.md for details.
+---
 
-## Author
+## 👩‍💻 Author
 
-Manual QA portfolio project created to demonstrate testing skills and documentation.
-
+This project was created as part of a QA portfolio to demonstrate:
+- Manual testing skills
+- API testing experience
+- Test documentation practices
+- Understanding of STLC
